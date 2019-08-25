@@ -25,7 +25,7 @@ public class Application {
 	
 	@GetMapping("/")
 	public String index(){
-		return "index";
+		return "indexs";
 	}
 
 }

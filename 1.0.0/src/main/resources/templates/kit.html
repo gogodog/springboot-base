@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+<title>boot-base[kit]</title>
+<meta charset="utf-8">
+<script type="text/javascript" th:src="@{/js/plugins/jquery-1.11.1.min.js}"></script>
+</head>
+<body>
+	<div th:include="::content">页面正文内容</div>
+	<h4 id="reback" style="position: absolute; text-align: center; bottom: 5%; width: 100%;">Back &lt;&lt;</h4>
+</body>
+<script>
+	$('#reback').click(function() {
+		window.location.href = "/";
+	})
+</script>
+</html>

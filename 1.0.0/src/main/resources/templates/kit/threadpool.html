@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:replace="kit">
+<div th:fragment="content" onselectstart="return false;">
+	<h1 style="text-align: center; padding-top: 5%;">THREAD-POOL</h1>
+	<div class="main">
+		<div class="left">说明文档（operation）</div>
+		<div class="right">
+			<div id="getmsg" class="msg"></div>
+			<div id="sendmsg" class="send">
+				<input type="text" class="msgtime" placeholder="please input msg"
+					id="msg"> <input type="text" class="msgtime"
+					placeholder="please input time" id="time"> <input
+					type="submit" value="send" onclick="sendmsg()">
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		function sendmsg() {
+			var msg = $('#msg').val();
+			if (!msg) {
+				alert("msg cannot be empty, the default time is 3 seconds");
+				return;
+			}
+			var time = $('#time').val();
+			if (!time) {
+				$('#time').val(3)
+			}
+			var urls = "/threadPool/startThread?msg=" + msg + "&time=" + time;
+			getX(urls, function(msg) {
+				console.log(msg);
+			})
+		}
+
+		var t1 = window.setInterval("getmsg()", 1000);
+		//去掉定时器的方法 
+		function getmsg() {
+			getX("/threadPool/getMesages", function(msg) {
+				if(msg && msg.length != 0){
+					for ( var i in msg)
+						$('<p>' + msg[i] + '</p>').prependTo($('#getmsg'));
+				}else{
+					$('<p>' + ". . ." + '</p>').prependTo($('#getmsg'));
+				}
+			})
+		}
+		function stop() {
+			window.clearInterval(t1);
+		}
+		function getX(url, calback) {
+			$.ajax({
+				type : "get",
+				url : url
+			}).success(function(message) {
+				calback(message);
+			}).fail(function(err) {
+				console.log("getX[" + url + "]error");
+			})
+		}
+	</script>
+	<style>
+.left {
+	background-color: maroon;
+	float: left;
+	width: 25%;
+	height: 100%;
+	margin-left: 24%;
+	font-family: fantasy;
+}
+
+.right {
+	background-color: maroon;
+	float: right;
+	width: 25%;
+	height: 100%;
+	margin-right: 24%;
+	font-family: fantasy;
+}
+
+.msg {
+	overflow-y: hidden;
+	height: 90%;
+	    border-bottom: 1px solid;
+	    padding: 0 5%;
+}
+
+.msgtime {
+	width: 38%;
+}
+
+.sendbtn {
+	width: 14%
+}
+
+.send{
+	margin:4%
+}
+
+.main {
+	background: mediumturquoise;
+	width: 100%;
+	margin: 0 auto;
+	height: 70%;
+	position: fixed;
+	word-wrap: break-word;
+	color: chartreuse;
+}
+</style>
+</div>
+</html>

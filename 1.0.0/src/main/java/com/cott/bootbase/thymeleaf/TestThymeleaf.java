@@ -16,19 +16,19 @@ import com.cott.bootbase.tools.pingyin.PinYinUtils;
  *
  */
 @Controller
-public class Test {
+public class TestThymeleaf {
 	
-	private static final Logger logs = LoggerFactory.getLogger(Test.class);
+	private static final Logger logs = LoggerFactory.getLogger(TestThymeleaf.class);
 	
 	@Value("${bootbase.welcom}")
 	public String s;
 	
-	@GetMapping("/index")
-	public String visitIndex(Model model, String name){
+	@GetMapping("/thymeleaf")
+	public String thymeleaf(Model model, String name){
 		logs.info("hello {} , welcome to boot-base !", name);
 		name = PinYinUtils.getHanziPinYin(name);
 		model.addAttribute("greet", StringUtils.isEmptyOrWhitespace(name) ? s : String.format("hello %s , welcome to boot-base !", name) );
-		return "thymeleaf";
+		return "/kit/thymeleaf";
 	}
 
 }

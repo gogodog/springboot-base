@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+<title>boot-base</title>
+<meta charset="utf-8">
+<title>Boot-Base</title>
+<link th:href="@{css/page/index.css}" rel="stylesheet" type="text/css">
+<script type="text/javascript" th:src="@{js/plugins/jquery-1.11.1.min.js}"></script>
+<script type="text/javascript" th:src="@{js/plugins/jquery.mousewheel.min.js}"></script>
+<script type="text/javascript" th:src="@{js/page/indexs.js}"></script>
+</head>
+<body>
+	<div class="wrapBox">
+		<div th:replace="@{/index/index}::index"></div>
+		<div th:replace="@{/index/menu}::menu"></div>
+	</div>
+	<div class="nav">
+		<ul name="leadpoint">
+			<li class="current"></li>
+			<li></li>
+		</ul>
+	</div>
+</body>
+</html>
+
+
